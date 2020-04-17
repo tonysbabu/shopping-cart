@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
 import Layout from "../../components/Layout";
 import ShoppingList from "../ShoppingList";
 import ShoppingCart from "../ShoppingCart";

@@ -3,10 +3,20 @@ import { Button } from "reactstrap";
 import { connect } from "react-redux";
 import { incrementCount, decrementCount } from "../../actions/cartActions";
 import CartItem from "../../components/CartItem";
-import { clearCart } from "../../actions/cartActions";
+import { clearCart, updateTotalCost } from "../../actions/cartActions";
 import "./styles.scss";
 
 class ShoppingCart extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    const { items, updateCartValue } = this.props;
+    if (prevProps.items !== items) {
+      const total = this.props.items.reduce(
+        (sum, item) => sum + item.qty * item.cost,
+        0
+      );
+      updateCartValue(total);
+    }
+  }
   handleIncrement = id => {
     this.props.handleIncrementCount(id);
   };
@@ -15,7 +25,7 @@ class ShoppingCart extends Component {
   };
   handleClearCart = () => this.props.clearCart();
   render() {
-    const { items } = this.props;
+    const { items, totalCost } = this.props;
 
     return (
       <>
@@ -36,7 +46,10 @@ class ShoppingCart extends Component {
         </div>
         {items.length > 0 && (
           <div className="checkout-btn-container">
-            <Button onClick={this.handleClearCart}>Checkout</Button>
+            <h4>{`Rs ${totalCost}`}</h4>
+            <Button className="checkout-btn" onClick={this.handleClearCart}>
+              Checkout
+            </Button>
           </div>
         )}
       </>
@@ -44,7 +57,8 @@ class ShoppingCart extends Component {
   }
 }
 const mapStateToProps = store => ({
-  items: store.cart.items
+  items: store.cart.items,
+  totalCost: store.cart.totalCost
 });
 const mapDispatchToProps = dispatch => ({
   handleRemove: () => {},
@@ -56,6 +70,9 @@ const mapDispatchToProps = dispatch => ({
   },
   clearCart: () => {
     dispatch(clearCart());
+  },
+  updateCartValue: total => {
+    dispatch(updateTotalCost(total));
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

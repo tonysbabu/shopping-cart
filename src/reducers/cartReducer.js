@@ -2,7 +2,8 @@ import { actionTypes } from "../actions/actionTypes";
 const { cartActions } = actionTypes;
 
 const INITIAL_STATE = {
-  items: []
+  items: [],
+  totalCost: 0
 };
 
 export default function cartReducer(state = INITIAL_STATE, action) {
@@ -34,6 +35,8 @@ export default function cartReducer(state = INITIAL_STATE, action) {
     }
     case cartActions.CLEAR_CART:
       return { ...state, items: [] };
+    case cartActions.UPDATE_TOTAL_COST:
+      return { ...state, totalCost: action.payload };
 
     default:
       return state;

@@ -6,7 +6,7 @@ import cart from "./cartReducer";
 const cartPersistConfig = {
   key: "cart",
   storage: storage,
-  whitelist: ["items"]
+  whitelist: ["items", "totalCost"]
 };
 
 export default combineReducers({

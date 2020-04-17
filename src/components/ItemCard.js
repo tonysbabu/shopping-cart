@@ -22,6 +22,7 @@ export default function ItemCard({ item, handleAddToCart }) {
       </CardBody>
       <CardBody className="item-button">
         <CardText>{item.description}</CardText>
+        <h6>{`Rs ${item.cost}`}</h6>
         <Button onClick={() => handleAddToCart(item)}>Add to Cart</Button>
       </CardBody>
     </Card>
