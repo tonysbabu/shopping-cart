@@ -1,0 +1,22 @@
+.home-container {
+  display: flex;
+  height: 95vh;
+  // background: linear-gradient(#646380, #412bc8);
+  .list-section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 10px;
+    height: 100%;
+    align-items: center;
+  }
+  .cart-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+    align-items: center;
+    position: relative;
+  }
+}

@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import "./App.css";
+import Home from "./containers/Home";
+import rootReducer from "./reducers";
+
+let store = createStore(rootReducer, applyMiddleware(thunk, logger));
+let persistor = persistStore(store);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Home />
+        </PersistGate>
+      </Provider>
     </div>
   );
 }

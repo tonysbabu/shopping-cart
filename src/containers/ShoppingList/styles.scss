@@ -1,0 +1,28 @@
+.loader {
+  position: absolute;
+  top: 40%;
+  display: flex;
+  justify-content: center;
+}
+.shopping-list-container {
+  width: 100%;
+  overflow: auto;
+}
+.item-card {
+  flex-direction: row !important;
+  margin-bottom: 10px;
+  .img-container {
+    width: 150px;
+    img {
+      width: 100%;
+    }
+  }
+  .item-info {
+    width: 40%;
+    padding: 10px;
+    .card-subtitle {
+      font-size: 12px;
+      color: grey;
+    }
+  }
+}
