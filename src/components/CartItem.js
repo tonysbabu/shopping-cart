@@ -24,7 +24,7 @@ export default function CartItem({
             alt="minus"
             onClick={() => handleDecrementCount(item.id)}
           />
-          <input type="number" value={item.qty} />
+          <input type="number" value={item.qty} disabled />
           <img
             src={plus}
             alt="plus"
